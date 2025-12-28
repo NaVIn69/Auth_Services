@@ -8,7 +8,14 @@ export default defineConfig(
     eslint.configs.recommended,
     tseslint.configs.recommendedTypeChecked,
     {
-        ignores: ['dist', 'node_modules', 'eslint.config.mjs','jest.config.js',"**/*.spec.ts", "**/*.test.ts"],
+        ignores: [
+            'dist',
+            'node_modules',
+            'eslint.config.mjs',
+            'jest.config.js',
+            '**/*.spec.ts',
+            '**/*.test.ts',
+        ],
     },
     // {
     //   files: ["**/*.ts", "**/*.cts", "**/*.mts"],
