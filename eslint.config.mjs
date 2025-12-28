@@ -8,7 +8,7 @@ export default defineConfig(
     eslint.configs.recommended,
     tseslint.configs.recommendedTypeChecked,
     {
-      ignores: ['dist', 'node_modules',"eslint.config.mjs"],
+        ignores: ['dist', 'node_modules', 'eslint.config.mjs'],
     },
     // {
     //   files: ["**/*.ts", "**/*.cts", "**/*.mts"],
@@ -17,13 +17,13 @@ export default defineConfig(
         languageOptions: {
             parserOptions: {
                 projectService: true,
-                tsconfigRootDir:import.meta.dirname,
-                allowDefaultProject: true
+                tsconfigRootDir: import.meta.dirname,
+                allowDefaultProject: true,
             },
         },
         rules: {
-            "no-console": 'warn',
-            'dot-notation':'error'
+            'no-console': 'warn',
+            'dot-notation': 'error',
         },
     },
 );
