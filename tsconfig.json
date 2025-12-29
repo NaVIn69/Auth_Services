@@ -16,7 +16,9 @@
         "noUncheckedIndexedAccess": true,
         "exactOptionalPropertyTypes": true,
 
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "emitDecoratorMetadata": true,
+         "experimentalDecorators": true,
     },
     "include": ["src/**/*.ts", "tests/**/*.ts"]
 }
