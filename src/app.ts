@@ -10,11 +10,11 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/health', (req, res) => {
-    res.status(200).json({
-        message: 'auth services health checkup',
-    });
-});
+// app.get('/health', (req, res) => {
+//     res.status(200).json({
+//         message: 'auth services health checkup',
+//     });
+// });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
