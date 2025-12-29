@@ -8,4 +8,5 @@ module.exports = {
     transform: {
         ...tsJestTransformCfg,
     },
+    verbose: true, //Prints each test file + test name
 };

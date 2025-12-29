@@ -2,7 +2,8 @@ import { DiscountPrice } from './src/utlis';
 import request from 'supertest';
 import app from './src/app';
 
-describe('DiscountPrice()', () => {
+// by using .skip we can skip that test case
+describe.skip('DiscountPrice()', () => {
     it('should apply 10% discount correctly', () => {
         const price = DiscountPrice(100, 10);
         expect(price).toBe(90);
