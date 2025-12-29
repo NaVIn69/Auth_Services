@@ -40,6 +40,19 @@ describe('POST /auth/register', () => {
                 expect.stringContaining('json'),
             );
         });
+
+        it('should presist the user in database', async () => {
+            const user = {
+                firstname: 'navin',
+                lastname: 'kumar',
+                email: 'navin@gmail.com',
+                password: 'secret',
+            };
+            // Act on post /auth/register endpoint with this user data
+            const response = await request(app)
+                .post('/auth/register')
+                .send(user);
+        });
     });
 
     describe('With Missing Data', () => {});
