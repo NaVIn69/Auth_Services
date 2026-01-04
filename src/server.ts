@@ -9,6 +9,7 @@ const StartServer = () => {
             logger.error('testing error log...');
             logger.info(`server is running on port ${PORT}`);
         });
+        logger.info(process.memoryUsage());
     } catch (error) {
         logger.info(error);
         process.exit(1);

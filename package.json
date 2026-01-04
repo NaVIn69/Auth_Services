@@ -15,7 +15,7 @@
     "type": "commonjs",
     "main": "dist/server.js",
     "scripts": {
-        "dev": "cross-env NODE_ENV=production nodemon --legacy-watch src/server.ts",
+        "dev": "cross-env NODE_ENV=dev nodemon --legacy-watch src/server.ts",
         "format:fix": "prettier . --write",
         "format:check": "prettier . --check",
         "lint:check": "eslint .",
@@ -55,6 +55,7 @@
         "dotenv": "^17.2.3",
         "express": "^5.2.1",
         "http-errors": "^2.0.1",
+        "pg": "^8.16.3",
         "reflect-metadata": "^0.2.2",
         "typeorm": "^0.3.28",
         "winston": "^3.19.0"

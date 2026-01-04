@@ -15,6 +15,7 @@ export default defineConfig(
             'jest.config.js',
             '**/*.spec.ts',
             '**/*.test.ts',
+            'tests/**'
         ],
     },
     // {
@@ -31,6 +32,8 @@ export default defineConfig(
         rules: {
             // 'no-console': 'warn',
             // 'dot-notation': 'error',
+            "@typescript-eslint/require-await": "off",
+            "@typescript-eslint/no-unsafe-assignment": "off",
         },
     },
 );
