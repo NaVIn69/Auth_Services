@@ -30,5 +30,5 @@ export const AppDataSource = new DataSource({
     database: 'mern_auth_service_test',
     entities: [User],
     // synchronize tells me which in db table is present or not
-    synchronize: false,
+    synchronize: true,
 });

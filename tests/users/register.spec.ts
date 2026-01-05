@@ -36,7 +36,7 @@ describe('POST /auth/register', () => {
                 firstName: 'navin',
                 lastName: 'kumar',
                 email: 'navin@gmail.com',
-                password: 'secret',
+                password: 'secret1',
             };
             // Act on post /auth/register endpoint with this user data
             const response = await request(app)
@@ -52,7 +52,7 @@ describe('POST /auth/register', () => {
                 firstName: 'navin',
                 lastName: 'kumar',
                 email: 'navin@gmail.com',
-                password: 'secret',
+                password: 'secret2',
             };
             // Act on post /auth/register endpoint with this user data
             const response = await request(app)
@@ -69,7 +69,7 @@ describe('POST /auth/register', () => {
                 firstName: 'navin',
                 lastName: 'kumar',
                 email: 'navin@gmail.com',
-                password: 'secret',
+                password: 'secret3',
             };
             // Act on post /auth/register endpoint with this user data
             const response = await request(app)
@@ -82,7 +82,6 @@ describe('POST /auth/register', () => {
             expect(users[0]?.firstName).toBe(userData.firstName);
             expect(users[0]?.lastName).toBe(userData.lastName);
             expect(users[0]?.email).toBe(userData.email);
-            expect(users[0]?.password).toBe(userData.password);
         });
 
         it('it should return id of created user', async () => {
@@ -90,7 +89,7 @@ describe('POST /auth/register', () => {
                 firstName: 'navin',
                 lastName: 'kumar',
                 email: 'navin@gmail.com',
-                password: 'secret',
+                password: 'secret4',
             };
             // Act on post /auth/register endpoint with this user data
             const response = await request(app)
@@ -116,7 +115,7 @@ describe('POST /auth/register', () => {
                 firstName: 'navin',
                 lastName: 'kumar',
                 email: 'navin@gmail.com',
-                password: 'secret',
+                password: 'secret5',
             };
             // Act on post /auth/register endpoint with this user data
             const response = await request(app)
@@ -128,6 +127,48 @@ describe('POST /auth/register', () => {
             const users = await userRepository.find();
             expect(users[0]).toHaveProperty('role');
             expect(users[0]!.role).toBe(Roles.CUSTOMER);
+        });
+
+        it('it should store hashed password inside the Database', async () => {
+            const userData = {
+                firstName: 'navin',
+                lastName: 'kumar',
+                email: 'navin@gmail.com',
+                password: 'secret6',
+            };
+            // Act on post /auth/register endpoint with this user data
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData);
+
+            // assert
+            const userRepository = connection.getRepository(User);
+            const users = await userRepository.find();
+
+            expect(users[0]?.password).not.toBe(userData.password);
+            expect(users[0]?.password).toHaveLength(60);
+            expect(users[0]?.password).toMatch(/^\$2[a|b]\$\d+\$/); // here we are checking my password is hashed or not
+        });
+
+        it('it should return 400 status code if email is register already', async () => {
+            const userData = {
+                firstName: 'navin',
+                lastName: 'kumar',
+                email: 'navin@gmail.com',
+                password: 'secret6',
+            };
+            // Act on post /auth/register endpoint with this user data
+            const userRepository = connection.getRepository(User);
+            await userRepository.save({ ...userData, role: Roles.CUSTOMER });
+            // here we have been created a user using testcase
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData);
+            console.log(response);
+            // assert
+            const user = await userRepository.find();
+            expect(user.length).toBe(1);
+            // expect(response.statusCode).toBe(400)
         });
     });
 

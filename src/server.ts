@@ -1,10 +1,12 @@
 import app from './app';
 import { Config } from './config';
+
 import logger from './config/logger';
 
-const StartServer = () => {
+const StartServer = async () => {
     try {
         const PORT = Config.PORT;
+
         app.listen(PORT, () => {
             // logger.error('testing error log...');
             logger.info(`server is running on port ${PORT}`);
@@ -15,4 +17,8 @@ const StartServer = () => {
     }
 };
 
-StartServer();
+StartServer()
+    .then(() => {})
+    .catch((error) => {
+        throw error;
+    });
