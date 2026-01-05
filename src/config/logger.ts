@@ -19,7 +19,7 @@ const logger = winston.createLogger({
                 winston.format.json(),
                 winston.format.prettyPrint(),
             ),
-            silent: Config.NODE_ENV == 'dev',
+            silent: Config.NODE_ENV == 'test',
         }),
         new winston.transports.File({
             level: 'error',
@@ -32,7 +32,7 @@ const logger = winston.createLogger({
                 winston.format.json(),
                 winston.format.prettyPrint(),
             ),
-            silent: Config.NODE_ENV == 'dev',
+            silent: Config.NODE_ENV == 'test',
         }),
         new winston.transports.Console({
             level: 'info',
@@ -43,7 +43,7 @@ const logger = winston.createLogger({
                 winston.format.json(),
                 winston.format.prettyPrint(),
             ),
-            silent: Config.NODE_ENV == 'dev',
+            silent: Config.NODE_ENV == 'test',
         }),
     ],
 });

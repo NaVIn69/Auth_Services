@@ -30,5 +30,5 @@ export const AppDataSource = new DataSource({
     password: 'new_password',
     database: 'mern_auth_service_test',
     entities: [User],
-    synchronize: false,
+    synchronize: true,
 });

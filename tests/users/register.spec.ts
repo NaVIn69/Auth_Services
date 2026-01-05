@@ -82,6 +82,32 @@ describe('POST /auth/register', () => {
             expect(users[0]?.email).toBe(userData.email);
             expect(users[0]?.password).toBe(userData.password);
         });
+
+        it('it should return id of created user', async () => {
+            const user = {
+                firstName: 'navin',
+                lastName: 'kumar',
+                email: 'navin@gmail.com',
+                password: 'secret',
+            };
+            // Act on post /auth/register endpoint with this user data
+            const response = await request(app)
+                .post('/auth/register')
+                .send(user);
+
+            // assert
+            const userRepository = connection.getRepository(User);
+            const users = await userRepository.find();
+
+            expect(response.body.user).toHaveProperty('id');
+            expect(response.statusCode).toBe(201);
+            expect(response.body.message).toBe('user successfully registered');
+
+            expect(response.body.user.id).toBe(users[0]!.id);
+            expect(response.body.user.firstName).toBe(users[0]!.firstName);
+            expect(response.body.user.lastName).toBe(users[0]!.lastName);
+            expect(response.body.user.email).toBe(users[0]!.email);
+        });
     });
 
     describe('With Missing Data', () => {});
