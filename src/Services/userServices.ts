@@ -6,13 +6,14 @@ import createHttpError from 'http-errors';
 export class UserService {
     constructor(private userRepository: Repository<User>) {}
 
-    async create({ firstName, lastName, email, password }: UserData) {
+    async create({ firstName, lastName, email, password, role }: UserData) {
         try {
             const user = this.userRepository.create({
                 firstName,
                 lastName,
                 email,
                 password,
+                role,
             });
             return await this.userRepository.save(user);
         } catch {

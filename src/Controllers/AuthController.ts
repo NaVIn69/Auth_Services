@@ -3,6 +3,7 @@ import { RegisteruserRequest } from '../types/index';
 
 import { UserService } from '../Services/userServices';
 import { Logger } from 'winston';
+import { Roles } from '../constants';
 
 export class AuthController {
     constructor(
@@ -28,6 +29,7 @@ export class AuthController {
                 lastName,
                 email,
                 password,
+                role: Roles.CUSTOMER,
             });
             this.logger.info('user registered successfully', { id: user.id });
             res.status(201).json({

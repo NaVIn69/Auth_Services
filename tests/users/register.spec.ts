@@ -4,6 +4,7 @@ import request from 'supertest';
 import { AppDataSource } from '../../src/config/data-source';
 import { User } from '../../src/entity/User';
 import { trancuateTables } from '../utils';
+import { Roles } from '../../src/constants';
 // AAA
 // A-> arrange all the data
 // A-> act -> using supertest , act on the endpoint
@@ -19,7 +20,8 @@ describe('POST /auth/register', () => {
 
     beforeEach(async () => {
         // database trancuate
-        await trancuateTables(connection);
+        await connection.dropDatabase();
+        await connection.synchronize();
     });
 
     afterAll(async () => {
@@ -107,6 +109,25 @@ describe('POST /auth/register', () => {
             expect(response.body.user.firstName).toBe(users[0]!.firstName);
             expect(response.body.user.lastName).toBe(users[0]!.lastName);
             expect(response.body.user.email).toBe(users[0]!.email);
+        });
+
+        it('it should have role', async () => {
+            const user = {
+                firstName: 'navin',
+                lastName: 'kumar',
+                email: 'navin@gmail.com',
+                password: 'secret',
+            };
+            // Act on post /auth/register endpoint with this user data
+            const response = await request(app)
+                .post('/auth/register')
+                .send(user);
+
+            // assert
+            const userRepository = connection.getRepository(User);
+            const users = await userRepository.find();
+            expect(users[0]).toHaveProperty('role');
+            expect(users[0]!.role).toBe(Roles.CUSTOMER);
         });
     });
 

@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { User } from '../entity/User';
-import { Config } from '.';
-import logger from './logger';
+// import { Config } from '.';
+// import logger from './logger';
 
 // export const AppDataSource = new DataSource({
 //     // here db credentianls must be keep the according to the enviromental
@@ -20,7 +20,6 @@ import logger from './logger';
 //     migrations: [],
 //     subscribers: [],
 // });
-logger.info(Config.DB_USERNAME);
 
 export const AppDataSource = new DataSource({
     type: 'postgres',
@@ -30,5 +29,6 @@ export const AppDataSource = new DataSource({
     password: 'new_password',
     database: 'mern_auth_service_test',
     entities: [User],
-    synchronize: true,
+    // synchronize tells me which in db table is present or not
+    synchronize: false,
 });
